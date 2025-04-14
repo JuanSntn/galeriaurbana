@@ -6,6 +6,7 @@ const Gallery = ({ items }) => {
     const [rotations, setRotations] = useState([]);
     const [tackColors, setTackColors] = useState([]);
     const [loaded, setLoaded] = useState(Array(items.length).fill(false));
+    const [loadedModal, setLoadedModal] = useState(false); // Nuevo estado para el modal
 
     const thumbtackColors = [
         '#FF6B6B', '#4ECDC4', '#45B7D1', '#FFBE0B',
@@ -17,6 +18,11 @@ const Gallery = ({ items }) => {
         setRotations(items.map(() => Math.floor(Math.random() * 10) - 5));
         setTackColors(items.map(() => thumbtackColors[Math.floor(Math.random() * thumbtackColors.length)]));
     }, [items]);
+
+    // Resetear loadedModal cuando cambia la imagen seleccionada
+    useEffect(() => {
+        setLoadedModal(false);
+    }, [selectedCard]);
 
     const handleImageLoad = (index) => {
         setLoaded(prev => {
@@ -89,10 +95,15 @@ const Gallery = ({ items }) => {
                                 <div className="modal-content" onClick={e => e.stopPropagation()}>
                                     <button className="close-button" onClick={closeModal}>×</button>
                                     <div className="modal-image-container">
+                                        {!loadedModal && (
+                                            <div className="modal-image-placeholder"></div>
+                                        )}
                                         <img
                                             src={item.src}
                                             alt={item.alt || 'Foto ampliada'}
-                                            className="modal-image"
+                                            className={`modal-image ${loadedModal ? 'loaded' : 'loading'}`}
+                                            onLoad={() => setLoadedModal(true)}
+                                            style={{ display: loadedModal ? 'block' : 'none' }}
                                         />
                                     </div>
                                     <div className="modal-caption">

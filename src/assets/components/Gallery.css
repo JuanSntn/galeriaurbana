@@ -101,7 +101,7 @@
 
 .polaroid-image {
     width: 100%;
-    height: auto;
+    height: 250px;
     aspect-ratio: 1/1;
     object-fit: cover;
     display: block;
@@ -128,8 +128,44 @@
     font-style: italic;
 }
 
+/* Placeholder del modal */
+.modal-image-placeholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    border-radius: 4px;
+}
 
-/* [Estilos anteriores permanecen igual] */
+@keyframes pulse {
+    0% {
+        opacity: 0.6;
+    }
+
+    50% {
+        opacity: 0.3;
+    }
+
+    100% {
+        opacity: 0.6;
+    }
+}
+
+.modal-image.loading {
+    display: none;
+}
+
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
 
 /* Estilos para el modal */
 .modal-overlay {
@@ -148,22 +184,18 @@
 }
 
 .modal-content {
-    max-width: 90%;
+    width: 500px;
     max-height: 90vh;
     background: white;
     padding: 30px;
     border-radius: 2px;
     position: relative;
     animation: zoomIn 0.3s ease;
+    display: flex;
+    flex-direction: column;
 }
 
-.modal-image {
-    max-width: 100%;
-    max-height: 80vh;
-    display: block;
-    margin: 0 auto;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-}
+
 
 .close-button {
     position: absolute;
@@ -235,23 +267,25 @@
 }
 
 
-
 /* Modal image container */
 .modal-image-container {
-    min-height: 300px;
+    width: 100%;
+    max-width: 500px;
+    aspect-ratio: 1/1;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #f9f9f9;
+    background: white;
+    border: 1px solid #eee;
+    padding: 8px;
+    margin: 0 auto;
 }
 
+
 .modal-image {
-    max-width: 200%;
-    max-height: 50vh;
+    width: 100%;
+    height: 100%;
     display: block;
-    margin: 0 auto;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-    animation: fadeIn 0.5s ease;
 }
 
 /* Animaciones */
